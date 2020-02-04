@@ -42,7 +42,7 @@ Is the CPUE of each species influenced by the time of day fishing occurs, and ar
   
   
   
-# Make sure to update the list of files below
+## R project file structure
 
 COMMAND_FISH6003_Major  
 |  
@@ -92,7 +92,7 @@ LON		|	Coordinates of longitude	| Degree	|
 DIVERS |	In the Galapagos Islands fishing is done with the Hooka diving modality, and the diver is the minimum sampling unit		 	| Diver  
 DIVING HOURS	| 	The number of hours that divers fish for lobster	| Hours	 
 CPUE		|	Observed values of a CPUE (indicator of relative abundance)	| Kg- tail / (diver x hour)	  
-SPECIES | Species of the spiny lobster of the genus *Pandalus* sp. captured during fishing | *gracilis*, *penicillatus*  
+SPECIES | Species of spiny lobster of the genus *Panulirus* sp. captured during fishing | *gracilis*, *penicillatus*  
 			  
 Sources: the Galapagos National Park Serivice.			
 
