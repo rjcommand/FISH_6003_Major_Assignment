@@ -1,0 +1,185 @@
+---
+title: "Major Assignment, Part 2"
+author: "FIRSTNAME LASTNAME"
+date: "January 21, 2019"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data Exploration
+
+### Research Question
+
+State your research question in words
+
+### Data source, and description of variables
+
+Describe your data source, and describe each variable
+
+> line by line okay
+
+# Begin exploration
+ 
+### Data pre-load
+
+```{r preload, include=TRUE}
+library(tidyverse)
+library(lubridate)
+
+source("../R/6003Functions.R")
+
+mydata <- read.csv("../data/MYDATA.csv") 
+
+# PASTE ALL CODE ASSOCIATED WITH LOADING AND CLEANING DATA HERE (i.e. from 001_DataSetup.R)
+
+
+```
+
+State in words if you made any decisions to exclude or alter data, based on what you discovered in your pre-load. 
+
+
+### 1. Outliers Y and X
+
+Are there outliers in Y or X?
+
+Y: Stage
+
+```{r outliersY}
+plot()
+```
+
+X: length, age, date, maturity
+
+```{r outliersX}
+plot()
+
+dotchart()
+```
+
+DESCRIBE HERE
+
+### 2. Homogeneity Y
+
+Check Y against categorical X's. 
+
+```{r homogeneity}
+p <- ggplot(data=, aes(x=, y=)) +
+  geom_boxplot() #Apply faceting if needed 
+p
+```
+
+DESCRIBE HERE: IS THERE HETEREOGENEITY OR IS Y HOMOGENOUS ACROSS CATEGORICAL X?
+
+### 3. Normality  Y
+
+Check distribution of Y for normal distribution
+
+```{r normality}
+p <- ggplot(data=, aes(x=)) +
+  geom_histogram(binwidth = 1)
+p 
+
+# OR hist()
+```
+
+DESCRIBE WHAT YOU SEE
+
+**If it's not normal, is it explainable by another covariate?**
+
+*hint: plot distributions at each level of categorical covariate*
+
+```{r normality2}
+p <- ggplot(data=, aes(x=)) +
+  geom_histogram(binwidth = 1) + facet_wrap(~)
+p 
+```
+
+### 4. Zero trouble Y 
+
+Are there many zero values of Y?
+
+```{r zerotrouble}
+plot(table()) 
+
+# Anything where students are showing absence of zeroes works here
+```
+
+DESCRIBE: ARE THERE MANY ZEROES?
+
+### 5. Collinearity X 
+
+Is there collinearity among covariates?
+
+```{r collinearity}
+pairs(~  +  +  + , 
+      lower.panel=panel.smooth, upper.panel=panel.cor, 
+      data=) 
+
+#Students should put all covariates in this
+```
+
+WHAT COVARIATES ARE COLINEAR?
+
+ARE THERE ANY OBVIOUS NON-LINEAR RELATIONSHIPS?
+
+### 6. Relationships Y and X
+
+Plot all covariates against Y
+
+```{r relationships}
+
+p <- ggplot(data=, aes(x=, y=)) + geom_point()
+q <- ggplot(data=, aes(x=, y=)) + geom_point()
+r <- ggplot(data=, aes(x=, y=)) + geom_boxplot() #Use appropriate plot types
+s <- ggplot(data=, aes(x=, y=)) + geom_point()
+
+multiplot(p,q,r,s, cols = 2)
+```
+
+DESCRIBE RELATIONSHIPS PRESENTED IN EACH PLOT
+
+### 7. Interactions
+
+Is relationship between covariates and Y mediated by categorical covariates?
+
+*hint: You need at least two categorical covariates to look for an interaction.*
+
+```{r interactions}
+#coplot(Y ~  | BLANK * BLANK, #insert categorical covariates on right side of |
+#       data=,
+#       panel=function(x,y,...) {
+#         panel.smooth(x,y,span=0.8,iter=5,...)
+#         abline(lm(y ~ x), col="blue") } )
+
+
+```
+
+WERE ANY INTERACTIONS OBSERVABLE?
+
+### 8. Independence Y
+
+Are there any reasons to suspect non-independence of observations? Most common would be due to *repeated measures*, *spatial autocorrelation*, or *temporal autocorrelation*. 
+
+Is there a nested structure to the data?
+
+DESCRIBE HERE.
+
+### Recap
+
+Re-state what you found, and what decisions you made
+
+1. Outliers Y and X: 
+2. Homogeneity Y: 
+3. Normality Y: 
+4. Zero trouble Y: 
+5. Collinearity X:
+6. Relationships Y and X: 
+7. Interactions: 
+8. Independence Y: 
+
+

@@ -1,0 +1,195 @@
+---
+title: "Major Assignment Part 3 Template"
+author: "FIRSTNAME LASTNAME"
+date: "xxx"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 3
+
+This is a template to help you copmlete Part 3 of the major assignment. Here you will complete each step as articulated in https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12577
+
+## Data pre-load
+
+Here is a block of space to paste in any code needed to load the data. For Part 3, I do not need to see your pre-load code.
+
+```{r preload, echo=FALSE, results="hide", include=FALSE}
+library(tidyverse)
+library(lubridate)
+
+source("../R/6003Functions.R")
+
+x <- read.csv("") 
+```
+
+## Research Question
+
+*Re-state your research question here*
+
+### 1. Identify the dependency structure in the data 
+
+*State, in words, if dependency structure exists in your data. If there is no structure, explain why you believe each replicate to be truly independent. You may re-insert your study diagram from Part 2 here to help*
+
+### 2. Present the statistical model
+
+*For mathematical notation in Markdown, please see: https://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/* 
+
+*Write the model formula. Remember we need to see a distribution a link function and a predictor function*.
+
+See the example below: 
+
+**Distribution**
+$NumCatch_{ij} = P(\mu_{ij})$
+$E(NumCatch_{ij}) = \mu_{ij}$
+
+**Link function**
+$\eta_{ij} = log(\mu_{ij})$
+
+**Predictor function**
+$\eta_{ij} = \beta_1Temperature_{ij} + TrapType_{ij} + StudyDay_i$
+$StudyDay_i ~ N(0, \sigma^2_{StudyDay})$
+
+
+### 3. Fit the full model
+
+** Are you going to standardize covariates? Why or why not? **
+
+```{r ModelPrep, echo=FALSE, include=FALSE}
+# Input any code here that will PREPARE THE DATA for model fitting. 
+# Note I've masked it above - I don't need to see this bit :)
+```
+
+
+```{r FitModel}
+# Input any code here for model fitting. I *do* need to see this bit.
+
+m <- glmer(NumCatch ~ Temperature + Traptype + (1 | StudyDay))
+
+summary(m)
+```
+
+
+### 4. Validate the full model
+
+**QUESTION: Have you satisfied conditions of independence and fixed X?**
+
+Here are a few validation steps. Note that the steps needed depend on the model you fit. Please include only those that are necessary and remove the rest:
+
+#### Normality of residuals
+
+```{r Normality}
+hist(resid(MYMODEL, type="pearson"))
+```
+
+**Are residuals normally distributed?**
+
+#### Overdispersion: 
+```{r Overdispersion}
+E1 <- resid(MYMODEL, type = "pearson")
+N  <- nrow(MYDATA) #Replace MYDATA with your dataset
+p  <- length(coef(MYMODEL)) #Replace MYMODEL with your model
+sum(E1^2) / (N - p) 
+```
+
+*Is your model overdispersed?*
+
+
+*If yes, please explore potential reasons:*
+
+A. Outliers Y
+B. Missing covariates?  
+C. Missing interactions?
+D. Zero inflation?     
+E. Dependency?     
+F. Non-linear patterns  
+G. Wrong link function   
+
+*What actions do you intend to take to rectify overdispersion?*
+
+#### Residuals 
+
+**Interpret each of the following:**
+```{r ResidVsFit}
+#Plot residuals vs. fitted values
+
+```
+
+```{r ResidVsFit}
+#Plot residuals vs. covariates in the model
+
+```
+
+```{r ResidVsFit}
+#Plot residuals vs. covariates not in the model
+```
+
+```{r ResidVsFit}
+#Plot residuals vs. time and space
+```
+
+
+**Question: Do you intend to engage in a model selection procedure? If so, what procedure will you follow? Why or why not?**
+
+### 4A. Model-selection and re-validation
+
+** Show any model selection procedure you used, then re-validate and present your reduced model **
+
+
+
+### 5. Interpret and present numerical output of the model
+
+```{r PresentOutput}
+summary(MYMODEL) #replace MYMODEL with your model
+```
+
+** Optional bonus: format this output as a nice publication-quality table (https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)**
+
+** Write out sentences in plain English that interpret your key findings, as related to the research question you stated in step 1 **
+
+
+### 6. Create a visual representation of the model
+
+** See: https://pbreheny.github.io/visreg/**
+
+```{r visualize}
+# Use the visreg package, or ggpredict
+# See Week 9 R code with some exmaples
+```
+
+WHAT COVARIATES ARE COLINEAR?
+
+ARE THERE ANY OBVIOUS NON-LINEAR RELATIONSHIPS?
+
+### 7. Simulate from the model
+
+** Check for zero-inflation**
+```{r simluate}
+# Simulation to establish zero-inflation
+N <- nrow(MYDATA) #MYDATA
+gg <- simulate(MYMOD, 10000) #MYMOD 
+
+zeros <- vector(length = 10000)
+for (i in 1:10000){
+  zeros[i] <- sum(gg[,i] == 0) / N
+}
+
+par(mar = c(5,5,2,2), cex.lab = 1.5)
+plot(table(zeros), 
+     xlim = c(0, 0.05),
+     axes = FALSE,
+     xlab = "Percentage of zeros",
+     ylab = "Frequency")
+axis(2)
+axis(1, at = c(0.01, 0.02, 0.03, 0.04, 0.05),
+     labels = c("1%", "2%", "3%", "4%", "5%"))     
+points(x = sum(MYDATA$MYRESPONSEVARIABLE==0) / N, y = 0, pch = 16, cex = 5, col = 2) #MYDATA and MYRESPONSEVARIABLE
+
+```
+
+** Was there zero-inflation? If yes, what might you try next? (You don't have to actually do it for Part 3)**
+
+# All done! I hope you enjoyed FISH 6003
