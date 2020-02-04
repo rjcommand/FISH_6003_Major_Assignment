@@ -1,8 +1,8 @@
 # FISH 6003: Major Assignment Data Setup
 
-# Rylan Command
+# Rylan J. Command
 # Created: Jan 15, 2020
-# Last edited: Jan 15, 2020
+# Last edited: Feb 4, 2020
 
 library(tidyverse)
 

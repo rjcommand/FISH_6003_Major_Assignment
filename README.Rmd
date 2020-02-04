@@ -27,13 +27,12 @@ The *P. gracilis* dataset contains 3186 observations and 16 variables.
 The *P. penicillatus* dataset contains 5086 observations and 16 variables.  
 These datasets were combined for the purposes of this assignment, and an extra variable was added for "species".    
   
-WHAT ARE THE DATA? HOW MANY POINTS? WHAT ARE THEY MEASURING? HOW ARE THEY MEASURED?
-
-Constraints of use:
+  
+### Constraints of use:  
 There are no use constraints on this data.
 
 
-Research questions:  
+### Research questions:  
   
 Which measured variables influence CPUE of spiny lobsters in the GMR?  
   
