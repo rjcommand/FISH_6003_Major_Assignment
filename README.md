@@ -1,18 +1,4 @@
----
-title: "README"
-subtitle: "FISH 6003: Statistics and Study Design for Fisheries"
-author: "Rylan J. Command"
-date: "04/02/2020"
-output:
-  pdf_document: default
-  html_document: default
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## Major assignment
+## FISH 6003 Major assignment
 
 ### Background:
 This is the project folder for the MAJOR ASSIGNMENT in the Winter 2020 semester.
